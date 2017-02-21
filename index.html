@@ -19,18 +19,20 @@
     </nav>
     <div class="sidepanel" data-bind="css: { active: activeClass() == true }">
         <h1 class="sidepanel-title">Santiago's Interesting Locations</h1>
-        <input type="text" name="lfilter" data-bind="textInput: markerSearch, valueUpdate: 'afterkeydown'" placeholder="Interesting Locations">
+        <div class="input-group input-group-sm">
+            <input class="marker-filter" type="text" name="mfilter" data-bind="textInput: markerSearch, valueUpdate: 'afterkeydown'" placeholder="Type here to filter locations">
+            <span class="input-group-addon glyphicon glyphicon-filter" id="sizing-addon3"> Filter</span>
+        </div>
         <ul class="sidepanel-menu" data-bind="foreach: filteredMarkers">
             <li class="sidepanel-item" data-bind="click: $parent.setCurrentMarker, text: $data.name"></li>
         </ul>
     </div>
     <div class="map-container" data-bind="css: { 'push-right': activeClass() == true }">
         <div id="map"></div>
-        <div class="map-msg--panel"></div>
     </div>
     <script src="js/libs/jquery.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQGRpatgNnGf6HbpyieBzchPcQaDshjQc&callback=initMap"></script>
     <script src="js/libs/knockout-3.4.1.js"></script>
     <script src="js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQGRpatgNnGf6HbpyieBzchPcQaDshjQc&callback=initMap" onerror="errorHandler()"></script>
 </body>
 </html>

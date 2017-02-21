@@ -53,10 +53,10 @@ var Location = function(data) {
     this.active = ko.observable(true);
 
     // load wikipedia data
-    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.name + '&format=json&callback=wikiCallback';
-    var $mapMsgPanel = $('.map-msg--panel');
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='
+        + this.name + '&format=json&callback=wikiCallback';
     var wikiRequestTimeout = setTimeout(function(){
-        $mapMsgPanel.text("failed to get wikipedia resources as it took too long");
+        alert("failed to get wikipedia resources as it took too long");
     }, 8000);
     var contentString = '';
 
@@ -66,6 +66,7 @@ var Location = function(data) {
         jsonp: "callback",
         success: function( response ) {
             self.info = response[2][0];
+            self.url = response[3][0];
 
             contentString = '<div id="content">'+
                 '<div id="siteNotice">'+
@@ -74,14 +75,15 @@ var Location = function(data) {
                 '<div id="bodyContent">'+
                 '<p>'+ self.info +'</p>'+
                 '</div>'+
+                '<a href="'+ self.url +'">'+ self.url +'</a>'
                 '</div>';
 
             self.createMarker();
 
             clearTimeout(wikiRequestTimeout);
-        }
+        },
     }).fail(function(e) {
-        $mapMsgPanel.text("failed to get wikipedia resources");
+        alert("failed to get wikipedia resources");
     });
 
     this.createMarker = function() {
@@ -181,4 +183,8 @@ var ViewModel = function() {
 
 function initMap() {
     ko.applyBindings(new ViewModel());
+}
+
+function errorHandler() {
+    alert("Failed to load resources. Please check your internet connection and try again.");
 }

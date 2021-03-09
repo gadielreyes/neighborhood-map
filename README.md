@@ -1,4 +1,4 @@
-## NEIGHBORHOOD MAPT PROJECT
+## NEIGHBORHOOD MAP PROJECT
 
 ## TABLE OF CONTENTS
 - [Quick start](#quick-start)
